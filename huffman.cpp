@@ -21,7 +21,7 @@
 #include <ctime>
 
 
-#include "bitstream.hpp"
+#include "bitstream.h"
 
 struct NODE
 {

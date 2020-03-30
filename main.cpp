@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "huffman.hpp"
+#include "huffman.h"
 
 
 int main(int argc, char** argv)
