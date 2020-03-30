@@ -1,5 +1,5 @@
 
-OBJS = obj/huffman.o obj/bitstream.o main.o
+OBJS = obj/huffman.o obj/bitstream.o obj/main.o
 
 bin/huffman: $(OBJS)
 	gcc $(OBJS) -o bin/huffman -lstdc++
@@ -13,3 +13,9 @@ obj/bitstream.o: bitstream.h bitstream.cpp
 obj/main.o: main.cpp
 	gcc -c -Wall main.cpp -o obj/main.o
 
+clean:
+	rm bin/huffman $(OBJS)
+
+build: 
+	mkdir obj bin
+	make

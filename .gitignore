@@ -4,3 +4,5 @@ huffman
 
 obj/
 bin/
+
+*.o
