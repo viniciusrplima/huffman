@@ -1,5 +1,5 @@
 
-OBJS = obj/huffman.o obj/bitstream.o main.o
+OBJS = obj/huffman.o obj/bitstream.o obj/main.o
 
 bin/huffman: $(OBJS)
 	gcc $(OBJS) -o bin/huffman -lstdc++
