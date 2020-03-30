@@ -11,17 +11,7 @@
  */
 
 
-#include <iostream>
-#include <iomanip>
-#include <fstream>
-#include <map>
-#include <vector>
-#include <bitset>
-#include <algorithm>
-#include <ctime>
-
-
-#include "bitstream.h"
+#include "huffman.h"
 
 struct NODE
 {

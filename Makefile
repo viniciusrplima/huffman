@@ -13,5 +13,3 @@ obj/bitstream.o: bitstream.h bitstream.cpp
 obj/main.o: main.cpp
 	gcc -c -Wall main.cpp -o obj/main.o
 
-run: 
-	./huffman
