@@ -2,8 +2,17 @@
 
 Algorithm for ASCII text compression. 
 
+Dependencies:
+```
+sudo apt install make
+```
+
 Compilation:
-``` g++ huffman.cpp -o huffman ```
+``` 
+make build
+```
 
 Using: 
-``` ./huffman <option> <input file> <output file> ```
+```
+./huffman <option> <input file> <output file> 
+```
