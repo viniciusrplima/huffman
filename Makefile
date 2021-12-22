@@ -1,17 +1,19 @@
-.PHONY: clean run
+.PHONY: clean run test
 .DEFAULT: build
 
-EXEC_FILE = huff
+EXEC_FILE=huff
 
-CXX = g++
+CXX=g++
 
-SRC_DIR = ./src
-BUILD_DIR = ./build
-SRCS := $(shell find $(SRC_DIR) -name *.cpp)
-OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
+SRC_DIR=./src
+BUILD_DIR=./build
+TEST_DIR=./test
 
-CPPINCS =
-CPPLIBS =
+SRCS:=$(shell find $(SRC_DIR) -name *.cpp)
+OBJS:=$(SRCS:%=$(BUILD_DIR)/%.o)
+
+CPPINCS=
+CPPLIBS=
 
 build: $(EXEC_FILE)
 
@@ -27,3 +29,6 @@ clean:
 
 run:
 	./$(EXEC_FILE)
+
+test:
+	$(TEST_DIR)/test_compression
