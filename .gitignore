@@ -1,8 +1,13 @@
 
 
-huffman
+huff
 
 obj/
 bin/
 
 *.o
+
+build/
+.vscode
+
+*.ini

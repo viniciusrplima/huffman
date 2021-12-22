@@ -1,21 +1,29 @@
+.PHONY: clean run
+.DEFAULT: build
 
-OBJS = obj/huffman.o obj/bitstream.o obj/main.o
+EXEC_FILE = huff
 
-bin/huffman: $(OBJS)
-	gcc $(OBJS) -o bin/huffman -lstdc++
+CXX = g++
 
-obj/huffman.o: huffman.h huffman.cpp
-	gcc -c -Wall huffman.cpp -o obj/huffman.o
+SRC_DIR = ./src
+BUILD_DIR = ./build
+SRCS := $(shell find $(SRC_DIR) -name *.cpp)
+OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 
-obj/bitstream.o: bitstream.h bitstream.cpp
-	gcc -c -Wall bitstream.cpp -o obj/bitstream.o
+CPPINCS =
+CPPLIBS =
 
-obj/main.o: main.cpp
-	gcc -c -Wall main.cpp -o obj/main.o
+build: $(EXEC_FILE)
+
+$(EXEC_FILE): $(OBJS)
+	$(CXX) $(OBJS) -o $@ $(CPPLIBS)
+
+$(BUILD_DIR)/%.cpp.o: %.cpp
+	-mkdir -p $(dir $@)
+	$(CXX) -c $< -o $@ $(CPPINCS) 
 
 clean:
-	rm bin/huffman $(OBJS)
+	-rm $(EXEC_FILE) $(OBJS)
 
-build: 
-	mkdir obj bin
-	make
+run:
+	./$(EXEC_FILE)
