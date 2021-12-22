@@ -21,14 +21,14 @@ int main(int argc, char** argv)
 
 	if(action == "com")
 	{
-		float inputSize =  getFileSizeKB(inputFile);
+		float inputSize =  Huffman::getFileSizeKB(inputFile);
 	
 		int initTime = std::clock();
-		compressFile(inputFile, outputFile);
+		Huffman::compressFile(inputFile, outputFile);
 		int elapsedTime = std::clock() - initTime;
 		int compressTime = (float) elapsedTime / CLOCKS_PER_SEC * 1000.0f;
 
-		float outputSize = getFileSizeKB(outputFile);
+		float outputSize = Huffman::getFileSizeKB(outputFile);
 
 		float compression = (float) (inputSize - outputSize) / inputSize * 100.0f;
        
@@ -43,14 +43,14 @@ int main(int argc, char** argv)
 	}
 	else if(action == "decom")
 	{
-		float inputSize =  getFileSizeKB(inputFile);
+		float inputSize = Huffman::getFileSizeKB(inputFile);
 	
 		int initTime = std::clock();
-		decompressFile(inputFile, outputFile);
+		Huffman::decompressFile(inputFile, outputFile);
 		int elapsedTime = std::clock() - initTime;
 		int decompressTime = (float) elapsedTime / CLOCKS_PER_SEC * 1000.0f;
 
-		float outputSize = getFileSizeKB(outputFile);
+		float outputSize = Huffman::getFileSizeKB(outputFile);
 
 		std::cout << std::fixed;
 		std::cout << std::setprecision(3);

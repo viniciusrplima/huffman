@@ -21,7 +21,7 @@ struct NODE
 	NODE *child0, *child1;
 };
 
-float getFileSizeKB(std::string filepath)
+float Huffman::getFileSizeKB(std::string filepath)
 {
 	std::ifstream file(filepath, std::ios::ate);
 	float size = (float) file.tellg() / 1000.0f;
@@ -30,7 +30,7 @@ float getFileSizeKB(std::string filepath)
 }
 
 // Make an Internal Node of Tree
-NODE* makeNode(int priority, NODE* child0, NODE* child1)
+NODE* Huffman::makeNode(int priority, NODE* child0, NODE* child1)
 {
 	NODE* node = new NODE();
 	node -> priority = priority;
@@ -42,7 +42,7 @@ NODE* makeNode(int priority, NODE* child0, NODE* child1)
 }
 
 // Make a Node with Value, Final point to a Branch
-NODE* makeLeaf(int priority, char value)
+NODE* Huffman::makeLeaf(int priority, char value)
 {
 	NODE* node = new NODE();
 	node -> priority = priority;
@@ -53,7 +53,7 @@ NODE* makeLeaf(int priority, char value)
 }
 
 // Create the Priority Node Queue
-std::vector<NODE*> getLeafQueue(std::ifstream &file)
+std::vector<NODE*> Huffman::getLeafQueue(std::ifstream &file)
 {
 	std::map<char, int> occurs;
 	std::vector<char> orderedKeys;
@@ -77,7 +77,7 @@ std::vector<NODE*> getLeafQueue(std::ifstream &file)
 }
 
 // Create the Huffman tree
-NODE* makeCharTree(std::ifstream &file)
+NODE* Huffman::makeCharTree(std::ifstream &file)
 {
 	auto leafQueue = getLeafQueue(file);
 
@@ -102,7 +102,7 @@ NODE* makeCharTree(std::ifstream &file)
 }
 
 // Map the Codes
-void mapCodeSet(NODE* node, std::map<char, std::string> &codeset, std::string code)
+void Huffman::mapCodeSet(NODE* node, std::map<char, std::string> &codeset, std::string code)
 {
 	if(node->leaf)
 	{
@@ -115,7 +115,7 @@ void mapCodeSet(NODE* node, std::map<char, std::string> &codeset, std::string co
 	}
 }
 
-void writeToken(OutBitstream *out, char c, std::string code)
+void Huffman::writeToken(OutBitstream *out, char c, std::string code)
 {
 	out->putc(c);
 
@@ -128,7 +128,7 @@ void writeToken(OutBitstream *out, char c, std::string code)
 }
 
 // Append tree to beginning of the compressed file
-void writeHead(OutBitstream *out, std::map<char, std::string> codeset)
+void Huffman::writeHead(OutBitstream *out, std::map<char, std::string> codeset)
 {
 	char size = codeset.size();
 	out->putc(size);
@@ -137,7 +137,7 @@ void writeHead(OutBitstream *out, std::map<char, std::string> codeset)
 		writeToken(out, token.first, token.second);
 }
 
-void writeBody(std::ifstream &in, OutBitstream *out, std::map<char, std::string> codeset)
+void Huffman::writeBody(std::ifstream &in, OutBitstream *out, std::map<char, std::string> codeset)
 {
     in.clear();
     in.seekg(0, in.beg);
@@ -151,7 +151,7 @@ void writeBody(std::ifstream &in, OutBitstream *out, std::map<char, std::string>
 	}
 }
 
-void compressFile(const std::string in, const std::string out)
+void Huffman::compressFile(const std::string in, const std::string out)
 {
 	std::ifstream file(in);
 	std::ofstream compressed(out, std::ios::binary);
@@ -174,7 +174,7 @@ void compressFile(const std::string in, const std::string out)
 	file.close();
 }
 
-void readHead(InBitstream *in, std::map<std::string, char> &codeset)
+void Huffman::readHead(InBitstream *in, std::map<std::string, char> &codeset)
 {
 	char size = in->getc();
         
@@ -196,7 +196,7 @@ void readHead(InBitstream *in, std::map<std::string, char> &codeset)
 	}
 }
 
-void parseBody(InBitstream *in, std::map<std::string, char> codeset, std::ofstream &out)
+void Huffman::parseBody(InBitstream *in, std::map<std::string, char> codeset, std::ofstream &out)
 {
 	std::string code = "";
 	while(!in->eof())
@@ -217,7 +217,7 @@ void parseBody(InBitstream *in, std::map<std::string, char> codeset, std::ofstre
 	}
 }
 
-void decompressFile(const std::string in, const std::string out)
+void Huffman::decompressFile(const std::string in, const std::string out)
 {
 	std::ifstream file(in);
 	std::ofstream decompress(out);

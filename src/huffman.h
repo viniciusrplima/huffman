@@ -20,18 +20,28 @@
 
 struct NODE;
 
-float getFileSizeKB(std::string);
-NODE* makeNode(int, NODE*, NODE*);
-NODE* makeLeaf(int, char);
-std::vector<NODE*> getLeafQueue(std::ifstream&);
-NODE* makeCharTree(std::ifstream&);
-void mapCodeSet(NODE*, std::map<char, std::string>&, std::string);
-void writeToken(OutBitstream*, char, std::string);
-void writeHead(OutBitstream*, std::map<char, std::string>);
-void writeBody(std::ifstream&, OutBitstream*, std::map<char, std::string>);
-void compressFile(const std::string, const std::string);
-void readHead(InBitstream*, std::map<std::string, char>&);
-void parseBody(InBitstream*, std::map<std::string, char>, std::ofstream&);
-void decompressFile(const std::string, const std::string);
+class Huffman {
+
+public:
+    static void compressFile(const std::string, const std::string);
+    static void decompressFile(const std::string, const std::string);
+    static float getFileSizeKB(std::string);
+
+private:
+
+    static NODE* makeNode(int, NODE*, NODE*);
+    static NODE* makeLeaf(int, char);
+    static std::vector<NODE*> getLeafQueue(std::ifstream&);
+    static NODE* makeCharTree(std::ifstream&);
+    static void mapCodeSet(NODE*, std::map<char, std::string>&, std::string);
+    static void writeToken(OutBitstream*, char, std::string);
+    static void writeHead(OutBitstream*, std::map<char, std::string>);
+    static void writeBody(std::ifstream&, OutBitstream*, std::map<char, std::string>);
+    static void readHead(InBitstream*, std::map<std::string, char>&);
+    static void parseBody(InBitstream*, std::map<std::string, char>, std::ofstream&);
+
+};
+
+
 
 
