@@ -30,5 +30,5 @@ clean:
 run:
 	./$(EXEC_FILE)
 
-test:
+test: build
 	$(TEST_DIR)/test_compression
