@@ -1,0 +1,28 @@
+#!/bin/bash
+
+./huff com ./test/data ./test/data.huff
+./huff decom ./test/data.huff ./test/data.dehuff
+
+INPUT_SIZE=$(stat -c "%s" ./test/data)
+COMP_SIZE=$(stat -c "%s" ./test/data.huff)
+DECOMP_SIZE=$(stat -c "%s" ./test/data.dehuff)
+FILES_DIFF=$(diff -y --suppress-common-lines ./test/data ./test/data.dehuff | grep '^' | wc -l)
+
+
+if [ $COMP_SIZE -gt $INPUT_SIZE ]
+then
+    echo "ERROR: compression file size must be smaller than input file size"
+    exit 1
+fi
+
+if [ $COMP_SIZE -gt $DECOMP_SIZE ]
+then
+    echo "ERROR: compression file size must be smaller than decompression file size"
+    exit 1
+fi
+
+if [ $FILES_DIFF -gt 0 ]
+then
+    echo "ERROR: input file must be equal to decompression file"
+    exit 1
+fi

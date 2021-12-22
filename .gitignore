@@ -7,6 +7,9 @@ bin/
 
 *.o
 
+*.huff
+*.dehuff
+
 build/
 .vscode
 
