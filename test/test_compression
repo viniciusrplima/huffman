@@ -23,6 +23,6 @@ fi
 
 if [ $FILES_DIFF -gt 0 ]
 then
-    echo "ERROR: input file must be equal to decompression file"
+    echo "ERROR: input file must be equal to decompression file. Difference: ${FILES_DIFF} lines"
     exit 1
 fi
